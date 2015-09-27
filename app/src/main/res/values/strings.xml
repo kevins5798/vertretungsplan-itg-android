@@ -1,6 +1,18 @@
 <resources>
+    <array name="drawer_titles">
+        <item>Vertretungsplan</item>
+        <item>Mein Vertretungsplan</item>
+    </array>
+
     <string name="app_name">Vertretungsplan ITG</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="menu_bar_title">Gesamter Vertretungsplan</string>
+    <string name="action_sync">Sync</string>
     <string name="table_top">Std.   Kl.   Fach   Kommentar</string>
+    <string name="vertretungsplan_header">Vertretungen</string>
+    <string name="general_info_header">Allg. Infos</string>
+    <string name="absent_classes_header">Abwesende Klassen</string>
+
+    <!-- SyncAdapter related -->
+    <string name="sync_account_type">vertretungsplan.itgdah.de</string>
+    <string name="content_authority">de.itgdah.vertretungsplan.app</string>
 </resources>
