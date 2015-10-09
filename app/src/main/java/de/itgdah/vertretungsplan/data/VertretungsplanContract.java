@@ -4,14 +4,8 @@ import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 /**
- * Created by moritz on 23.03.15.
+ * Contract that describes the interface of the content provider.
  */
 public class VertretungsplanContract {
 
@@ -19,7 +13,7 @@ public class VertretungsplanContract {
     public static final String CONTENT_AUTHORITY = "de.itgdah.vertretungsplan";
 
     // Base of all URI's which are used to interact with the content provider.
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     // Paths that are appended to the BASE_CONTENT_URI to provide access to
     // the individual tables
@@ -34,32 +28,6 @@ public class VertretungsplanContract {
     // Format used for storing dates in the database.  ALso used for converting those strings
     // back into date objects for comparison/processing.
     public static final String DATE_FORMAT = "yyyyMMdd";
-
-    /**
-     * Converts the given date object to a database-friendly representation.
-     * @param date the date to be converted
-     *             preconditions: format: DateFormat.MEDIUM, Locale.GERMAN
-     * @return date converted to the database format specified in {@link VertretungsplanContract}
-     */
-    public static String convertDateToDatabaseFriendlyFormat(Date date) {
-        DateFormat dbFormatter = new SimpleDateFormat(VertretungsplanContract.DATE_FORMAT, Locale.GERMAN);
-        return dbFormatter.format(date);
-    }
-
-    /**
-     * Converts a dateText to a long Unix time representation
-     * @param dateText the input date string
-     * @return the Date object
-     */
-    public static Date getDateFromDb(String dateText) {
-        SimpleDateFormat dbDateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.GERMAN);
-        try {
-            return dbDateFormat.parse(dateText);
-        } catch ( ParseException e ) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     /* Inner class that defines the table contents of the Vertretungen
     table. */
@@ -185,8 +153,14 @@ public class VertretungsplanContract {
         // Table name
         public static final String TABLE_NAME = "absent_classes";
 
-        // Message defining the absent class and the reason why it is absent.
-        public static final String COLUMN_MESSAGE = "message";
+        // Message defining the the reason why it is absent.
+        public static final String COLUMN_COMMENT = "message";
+
+        // The absent class
+        public static final String COLUMN_CLASS = "class";
+
+        // period range in which the class is absent
+        public static final String COLUMN_PERIOD_RANGE = "period_range";
 
         // Foreign key pointing to the days table.
         public static final String COLUMN_DAYS_KEY = "days_id";
@@ -219,6 +193,10 @@ public class VertretungsplanContract {
 
         // The subject that the user wants to have displayed in the personal vertretungsplan.
         public static final String COLUMN_SUBJECT = "subject";
+
+        public static Uri buildPersonalDataUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
 
     }
 }

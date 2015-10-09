@@ -1,0 +1,51 @@
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_base_activity"
+    style="@style/AppTheme"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ui.BaseVertretungsplanActivity"
+    xmlns:fab="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar"></include>
+
+        <ViewStub
+            android:id="@+id/sliding_tabs_stub"
+            android:inflatedId="@+id/sliding_tabs"
+            android:layout="@layout/sliding_tabs_strip_element"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:id="@+id/tabs_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@drawable/tabs_shadow"/>
+
+        <ViewStub
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inflatedId="@+id/vertretungsplan_days_pager"
+            android:id="@+id/vertretungsplan_days_pager_stub"
+            android:layout="@layout/vertretungsplan_days_pager"/>
+        <ViewStub
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inflatedId="@+id/my_data_fragment"
+            android:id="@+id/my_data_fragment_stub"
+            android:layout="@layout/my_data_fragment"/>
+
+
+    </LinearLayout>
+
+    <include layout="@layout/drawer"></include>
+
+</android.support.v4.widget.DrawerLayout>

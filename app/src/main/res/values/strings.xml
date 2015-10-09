@@ -1,18 +1,28 @@
 <resources>
     <array name="drawer_titles">
-        <item>Vertretungsplan</item>
+        <item>Allg. Vertretungsplan</item>
         <item>Mein Vertretungsplan</item>
     </array>
 
     <string name="app_name">Vertretungsplan ITG</string>
-    <string name="menu_bar_title">Gesamter Vertretungsplan</string>
-    <string name="action_sync">Sync</string>
-    <string name="table_top">Std.   Kl.   Fach   Kommentar</string>
     <string name="vertretungsplan_header">Vertretungen</string>
-    <string name="general_info_header">Allg. Infos</string>
     <string name="absent_classes_header">Abwesende Klassen</string>
 
     <!-- SyncAdapter related -->
     <string name="sync_account_type">vertretungsplan.itgdah.de</string>
-    <string name="content_authority">de.itgdah.vertretungsplan.app</string>
+    <string name="content_authority">de.itgdah.vertretungsplan</string>
+    <string name="date_stamp_key">vertretungsplan_last_updated</string>
+
+    <string name="refresh">Aktualisieren</string>
+    <string name="general_info_table_header">Allg. Infos</string>
+    <string name="absent_classes_table_header">Abwesende Klassen</string>
+    <string name="my_data">Meine Daten</string>
+    <string name="my_data_done">Fertig</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+    <string name="my_data_class">Klasse</string>
+    <string name="my_data_subject">Fächer / Kurse</string>
+    <string name="class_cannot_be_empty">Bitte fülle das Klassenfeld aus.</string>
+    <string name="my_data_class_hint">z.B. 11, 11S (per Komma getrennt)</string>
+    <string name="my_data_subject_hint">z. B. 1sk4, 1d7 (per Komma getrennt)</string>
 </resources>

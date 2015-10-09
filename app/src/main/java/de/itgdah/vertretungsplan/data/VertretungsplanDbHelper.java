@@ -13,13 +13,13 @@ import de.itgdah.vertretungsplan.data.VertretungsplanContract.PersonalData;
 /**
  * Manages a local database for the Vertretungsplan.
  */
-public class VertretungsplanDbHelper extends SQLiteOpenHelper {
+class VertretungsplanDbHelper extends SQLiteOpenHelper {
 
     /* Denotes the database version. Increment this value,
      if the database schema changes */
     private static final int DATABASE_VERSION = 1;
 
-    public static final String DATABASE_NAME = "vertretungsplan.db";
+    private static final String DATABASE_NAME = "vertretungsplan.db";
 
     public VertretungsplanDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -37,9 +37,11 @@ public class VertretungsplanDbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_ABSENT_CLASSES_TABLE = "CREATE TABLE " +
                 AbsentClasses.TABLE_NAME + " (" +
                 AbsentClasses._ID + " INTEGER PRIMARY KEY " +
-                "AUTOINCREMENT," +
+                "AUTOINCREMENT, " +
                 AbsentClasses.COLUMN_DAYS_KEY + " INTEGER, " +
-                AbsentClasses.COLUMN_MESSAGE + " TEXT," +
+                AbsentClasses.COLUMN_CLASS + " TEXT, " +
+                AbsentClasses.COLUMN_PERIOD_RANGE + " TEXT, " +
+                AbsentClasses.COLUMN_COMMENT + " TEXT, " +
                 " FOREIGN KEY (" + AbsentClasses.COLUMN_DAYS_KEY + ") " +
                 "REFERENCES " + Days.TABLE_NAME + " (" + Days._ID +
                 ") )";
@@ -61,7 +63,7 @@ public class VertretungsplanDbHelper extends SQLiteOpenHelper {
                 Vertretungen._ID + " INTEGER PRIMARY " +
                 "KEY AUTOINCREMENT," +
                 Vertretungen.COLUMN_DAYS_KEY + " INTEGER, " +
-                Vertretungen.COLUMN_PERIOD + " TEXT," +
+                Vertretungen.COLUMN_PERIOD + " INTEGER," +
                 Vertretungen.COLUMN_CLASS + " TEXT," +
                 Vertretungen.COLUMN_SUBJECT + " TEXT," +
                 Vertretungen.COLUMN_VERTRETEN_DURCH + " TEXT," +
@@ -77,7 +79,7 @@ public class VertretungsplanDbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_PERSONAL_DATA_TABLE = "CREATE TABLE " +
                 PersonalData.TABLE_NAME + " (" +
                 PersonalData._ID + " INTEGER PRIMARY " + "KEY AUTOINCREMENT," +
-                PersonalData.COLUMN_CLASS + " TEXT" +
+                PersonalData.COLUMN_CLASS + " TEXT," +
                 PersonalData.COLUMN_SUBJECT + " TEXT" + " )";
 
 
@@ -86,6 +88,7 @@ public class VertretungsplanDbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_ABSENT_CLASSES_TABLE);
         db.execSQL(SQL_CREATE_GENERAL_INFO_TABLE);
         db.execSQL(SQL_CREATE_VERTRETUNGEN_TABLE);
+        db.execSQL(SQL_CREATE_PERSONAL_DATA_TABLE);
     }
 
     @Override
@@ -97,6 +100,7 @@ public class VertretungsplanDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + AbsentClasses.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + GeneralInfo.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + Vertretungen.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PersonalData.TABLE_NAME);
         onCreate(db);
     }
 }

@@ -6,7 +6,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 /**
- * Created by Moritz on 5/18/2015.
+ * Stub sync service.
  */
 public class VertretungsplanSyncService extends Service {
 
@@ -17,9 +17,10 @@ public class VertretungsplanSyncService extends Service {
 
     @Override
     public void onCreate() {
+        super.onCreate();
         Log.d(LOG_TAG, "onCreate - VertretungsplanSyncService");
         synchronized (sSyncAdapterLock) {
-            if (sSyncAdapterLock == null) {
+            if (sVertretungsplanSyncAdapter == null) {
                 sVertretungsplanSyncAdapter = new VertretungsplanSyncAdapter
                         (getApplicationContext(), true);
             }
